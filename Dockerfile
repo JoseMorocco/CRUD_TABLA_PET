@@ -16,7 +16,7 @@ RUN sed -i 's/^# deb-src/deb-src/' /etc/apt/sources.list && \
 RUN echo 'es_PE.UTF-8 UTF-8' > /etc/locale.gen && \
     locale-gen && \
     export LANG=es_PE.UTF-8 && \
-    export LC_ALL=es_PE.UTF-8
+    export LC_ALL=es_PE.UTF-8           
 
 # Configurar MariaDB   
 COPY ./db-init/create_db.sql /docker-entrypoint-initdb.d/

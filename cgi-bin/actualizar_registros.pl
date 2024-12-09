@@ -18,15 +18,12 @@ my $death   = $cgi->param('death');
 
 # Validar que los campos requeridos estén completos
 if (defined $id && defined $name && defined $owner && defined $species && defined $sex && defined $birth) {
-    # Conectar a la base de datos
     my $dbh = DBI->connect("DBI:mysql:menagerie", 'pet', '12345678', { RaiseError => 1, AutoCommit => 1 })
         or die "No se pudo conectar: $DBI::errstr";
 
-    # Preparar la consulta para actualizar
     my $sth = $dbh->prepare("UPDATE pet SET name = ?, owner = ?, species = ?, sex = ?, birth = ?, death = ? WHERE id = ?")
         or die "Error al preparar la consulta: $DBI::errstr";
 
-    # Ejecutar la consulta con los parámetros
     eval {
         $sth->execute($name, $owner, $species, $sex, $birth, $death, $id);
         print "Registro actualizado correctamente!";

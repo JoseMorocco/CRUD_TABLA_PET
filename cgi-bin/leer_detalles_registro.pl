@@ -12,11 +12,9 @@ my $id = $cgi->param('id');
 my %response;
 
 if (defined $id) {
-    # Conectar a la base de datos
     my $dbh = DBI->connect("DBI:mysql:menagerie", 'pet', '12345678', { RaiseError => 1, PrintError => 0 })
         or die "No se pudo conectar: $DBI::errstr";
 
-    # Consultar detalles del registro
     my $sth = $dbh->prepare("SELECT id, name, owner, species, sex, birth, death FROM pet WHERE id = ?")
         or die "Error al preparar la consulta: $DBI::errstr";
 
@@ -35,7 +33,6 @@ if (defined $id) {
         );
     }
 
-    # Desconectar la base de datos
     $dbh->disconnect;
 } else {
     %response = (
