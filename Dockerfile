@@ -58,7 +58,7 @@ RUN find /var/www/html/js/ -type f -exec dos2unix {} \;
 
 # Copiar el script de inicio al contenedor
 COPY ./start.sh /start.sh
-RUN chmod +x /start.sh
+RUN dos2unix /start.sh && chmod +x /start.sh
 
 # Exponer los puertos
 EXPOSE 22
